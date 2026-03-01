@@ -1,0 +1,32 @@
+class Solution {
+    public int minAddToMakeValid(String s) {
+        // Count of unmatched '(' parentheses
+        int opencount = 0;
+
+        // Count of unmatched ')' parentheses
+        int closecount = 0;
+
+        // Traverse each character in the string
+        for (char ch : s.toCharArray()) {
+
+            // If the character is an opening parenthesis
+            if (ch == '(') {
+                opencount++; // Increase count of open brackets
+            } 
+            else { // If the character is a closing parenthesis ')'
+                
+                // If there is an unmatched '(' available to pair with ')'
+                if (opencount > 0) {
+                    opencount--; // Pair it, so reduce one '('
+                } 
+                else {
+                    // No '(' available to match, so this ')' is extra
+                    closecount++;
+                }
+            }
+        }
+
+        // Total parentheses to add = unmatched '(' + unmatched ')'
+        return opencount + closecount;
+    }
+}
